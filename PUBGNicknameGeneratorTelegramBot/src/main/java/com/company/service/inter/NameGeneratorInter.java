@@ -18,7 +18,9 @@ public interface NameGeneratorInter
     
     String getUpperAndLowercaseNickWithSpace (String name);
     
-    List<String> getNickWithSymbols (String name);
+    List<String> getNickWithSymbols (String name, boolean changeCase);
     
     List<String> getClanTag (String tag);
+    
+    List<String> getNicksForClanTag (String name);
 }

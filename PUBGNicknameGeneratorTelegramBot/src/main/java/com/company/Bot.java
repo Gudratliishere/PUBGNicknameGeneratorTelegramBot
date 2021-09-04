@@ -6,6 +6,7 @@
 package com.company;
 
 import com.company.service.inter.NameGeneratorInter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
  */
 @Component
 public class Bot extends TelegramLongPollingBot
-{ 
-    
+{
+
     @Autowired
     NameGeneratorInter nameGenerator;
 
@@ -35,18 +36,52 @@ public class Bot extends TelegramLongPollingBot
     @Override
     public void onUpdateReceived(Update update)
     {
-        
-        String name = update.getMessage().getText();
-        
-        String nick = nameGenerator.getNicknames(name).get(0);
-        
-        SendMessage message = new SendMessage();
-        message.setText(nick);
-        message.setChatId(update.getMessage().getChatId().toString());
-        
+
+        String message = update.getMessage().getText();
+
+        String[] list = message.split(" ");
+        String command = list[0];
+
+        StringBuilder sb = new StringBuilder();
+
+        if (command.equals("1"))
+        {
+            List<String> nicks = nameGenerator.getNicknames(list[1]);
+
+            nicks.forEach((nick) -> sb.append(nick).append("\n"));
+        } else if (command.equals("2"))
+        {
+            List<String> nicks = nameGenerator.getNicknames(list[2], list[1]);
+
+            nicks.forEach((nick) -> sb.append(nick).append("\n"));
+        } else if (command.equals("/info"))
+            sb.append("Əgər klan tağı olmadan tək ad istəyirsinizsə mesaj bölməsinə 1 yazıb boşluq buraxıb "
+                    + "ardınca istədiyiniz adınızı yazın. Məsələn :\n"
+                    + "1 death\n"
+                    + "Əgər klan tağı ilə birgə ad istəyirsinizsə ozaman 2 yazıb boşluq buraxıb ardınca klan tağınızı "
+                    + "və adınızı aralarında boşluq olmağla yazın. Məsələn : \n"
+                    + "2 fury death."
+                    + "PUBG maksimum 14 hərf qəbul edə bilir. Bunu nəzərə alaraq adınızı seçin. Əgər boşluq hərfli "
+                    + "ad istəyirsinizsə PUBG qəbul etməsi üçün maksimum 7 hərfli bir ad seçməlisiniz. ");
+        else if (command.equals("/start"))
+            sb.append("Salam. PUBG nickname hazırlayan botumuza xoş gəlmisiniz. Botumuzun məqsədi internetdə "
+                    + "çox gəzmədən və ya dost-tanışınıza mənə qəşəy ad düzəlt demədən özünüzün 1 saniyəyə "
+                    + "adınızı düzəltməyinizə kömək etməkdir. Botun necə istifadə olunacağı haqqında məlumatınız "
+                    + "yoxdursa info kamandasından istifadə edin.");
+        else if (command.equals("/contact"))
+            sb.append("Əlaqə:\n"
+                    + "Gmail: d.qudretli@gmail.om\n"
+                    + "Instagram: @dunayqudrtli\n"
+                    + "Facebook: Dunay Qüdrətli\n"
+                    + "Telegram: @Kudratli");
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText(sb.toString());
+        sendMessage.setChatId(update.getMessage().getChatId().toString());
+
         try
         {
-            execute(message);
+            execute(sendMessage);
         } catch (TelegramApiException ex)
         {
             Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,5 +93,5 @@ public class Bot extends TelegramLongPollingBot
     {
         return "PUBGNameGeneratorBot";
     }
-    
+
 }

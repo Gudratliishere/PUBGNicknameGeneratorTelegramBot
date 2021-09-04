@@ -4,7 +4,9 @@ package com.company.service.inter;
  *
  * @author x
  */
-public interface UppercaseNickGeneratorInter
+public interface DifferentLettersNickGeneratorInter
 {
     String generateNick (String name);
+    
+    char getCharacter (char c);
 }

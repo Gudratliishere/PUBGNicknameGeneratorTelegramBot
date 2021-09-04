@@ -1,16 +1,16 @@
 package com.company.service.impl;
 
-import com.company.service.inter.UppercaseNickGeneratorInter;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import com.company.service.inter.DifferentLettersNickGeneratorInter;
 
 /**
  *
  * @author x
  */
-@Service()
-public class UppercaseNickGeneratorImpl implements UppercaseNickGeneratorInter
+@Service("uppercase")
+public class UppercaseNickGeneratorImpl implements DifferentLettersNickGeneratorInter
 {
 
     private Map<Character, Character> letters;
@@ -49,6 +49,7 @@ public class UppercaseNickGeneratorImpl implements UppercaseNickGeneratorInter
         letters.put('x', 'Ｘ');
         letters.put('y', 'Ｙ');
         letters.put('z', 'Ｚ');
+        letters.put(' ', 'Ī');
     }
 
     @Override
@@ -59,9 +60,22 @@ public class UppercaseNickGeneratorImpl implements UppercaseNickGeneratorInter
         StringBuilder sb = new StringBuilder();
         
         for (int i = 0; i < name.length(); i++)
-            sb.append(letters.get(name.charAt(i)));
+        {
+            Character c = letters.get(name.charAt(i));
+            
+            if (c != null)
+                sb.append(c);
+            else
+                sb.append(name.charAt(i));
+        }
         
         return sb.toString();
+    }
+
+    @Override
+    public char getCharacter(char c)
+    {
+        return letters.get(c) != null ? letters.get(c) : c;
     }
 
 }
