@@ -18,6 +18,14 @@ public interface NameGeneratorInter
     
     String getUpperAndLowercaseNickWithSpace (String name);
     
+    String getOneLettersNick (String name);
+    
+    String getTwoLettersNick (String name);
+    
+    String getThreeLettersNick (String name);
+    
+    String getReverseLettersNick (String name);
+    
     List<String> getNickWithSymbols (String name, boolean changeCase);
     
     List<String> getClanTag (String tag);

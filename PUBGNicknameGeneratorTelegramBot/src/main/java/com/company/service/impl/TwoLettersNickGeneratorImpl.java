@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
  *
  * @author x
  */
-@Service("oneletters")
-public class OneLettersNickGeneratorImpl implements DifferentLettersNickGeneratorInter
+@Service("twoletters")
+public class TwoLettersNickGeneratorImpl implements DifferentLettersNickGeneratorInter
 {
 
     private Map<Character, Character> letters;
 
-    public OneLettersNickGeneratorImpl()
+    public TwoLettersNickGeneratorImpl()
     {
         initLetters();
     }
@@ -23,32 +23,32 @@ public class OneLettersNickGeneratorImpl implements DifferentLettersNickGenerato
     private void initLetters()
     {
         letters = new HashMap<>();
-        letters.put('a', 'α');
-        letters.put('b', 'в');
-        letters.put('c', '¢');
-        letters.put('d', '∂');
-        letters.put('e', 'є');
-        letters.put('f', 'ƒ');
-        letters.put('g', 'g');
-        letters.put('h', 'н');
-        letters.put('i', 'ι');
-        letters.put('j', 'נ');
-        letters.put('k', 'к');
-        letters.put('l', 'ℓ');
-        letters.put('m', 'м');
-        letters.put('n', 'η');
-        letters.put('o', 'σ');
-        letters.put('p', 'ρ');
-        letters.put('q', 'q');
-        letters.put('r', 'я');
-        letters.put('s', 'ѕ');
-        letters.put('t', 'т');
-        letters.put('u', 'υ');
-        letters.put('v', 'ν');
-        letters.put('w', 'ω');
-        letters.put('x', 'χ');
-        letters.put('y', 'у');
-        letters.put('z', 'z');
+        letters.put('a', '₳');
+        letters.put('b', '฿');
+        letters.put('c', '₵');
+        letters.put('d', 'Đ');
+        letters.put('e', 'Ɇ');
+        letters.put('f', '₣');
+        letters.put('g', '₲');
+        letters.put('h', 'Ⱨ');
+        letters.put('i', 'ł');
+        letters.put('j', 'J');
+        letters.put('k', '₭');
+        letters.put('l', 'Ⱡ');
+        letters.put('m', '₥');
+        letters.put('n', '₦');
+        letters.put('o', 'Ø');
+        letters.put('p', '₱');
+        letters.put('q', 'Q');
+        letters.put('r', 'Ɽ');
+        letters.put('s', '₴');
+        letters.put('t', '₮');
+        letters.put('u', 'Ʉ');
+        letters.put('v', 'V');
+        letters.put('w', '₩');
+        letters.put('x', 'Ӿ');
+        letters.put('y', 'Ɏ');
+        letters.put('z', 'Ⱬ');
         letters.put(' ', 'Ī');
     }
 
